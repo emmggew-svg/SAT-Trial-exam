@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital SAT Practice Test 5 - Interactive</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Welcome Screen -->
+        <div id="welcome-screen" class="screen active">
+            <div class="welcome-container">
+                <div class="logo">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="64" height="64" rx="12" fill="#0066CC"/>
+                        <text x="32" y="42" text-anchor="middle" font-family="Inter, sans-serif" font-size="28" font-weight="700" fill="white">SAT</text>
+                    </svg>
+                </div>
+                <h1>Digital SAT Practice Test 5</h1>
+                <p class="subtitle">Resmi College Board formatında tam uyarlamalı test simülasyonu</p>
+                
+                <div class="test-info">
+                    <div class="info-card">
+                        <span class="info-icon">📖</span>
+                        <div>
+                            <strong>Reading & Writing</strong><br>
+                            <span>54 Soru • 64 Dakika • 2 Modül</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <span class="info-icon">🧮</span>
+                        <div>
+                            <strong>Math</strong><br>
+                            <span>44 Soru • 70 Dakika • 2 Modül</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <span class="info-icon">⏱️</span>
+                        <div>
+                            <strong>Toplam</strong><br>
+                            <span>98 Soru • 134 Dakika</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="features">
+                    <h3>Test Özellikleri</h3>
+                    <ul>
+                        <li>✅ Her soru için ayrı sayfa, şık seçimi ve gezinme</li>
+                        <li>✅ Gerçek SAT zamanlayıcı (modül bazlı)</li>
+                        <li>✅ İşaretleme & gözden geçirme paneli</li>
+                        <li>✅ Son soruda "Sınavı Bitir" butonu (onaylı)</li>
+                        <li>✅ Detaylı sonuç raporu: Cevap anahtarı, senin cevapların, açıklamalar</li>
+                        <li>✅ Puan tahmini (R&W, Math, Toplam)</li>
+                    </ul>
+                </div>
+                
+                <button id="start-test" class="btn btn-primary btn-large">
+                    <span>Testi Başlat</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+                
+                <p class="disclaimer">Bu test College Board resmi Practice Test 5'i temel alarak hazırlanmış bir simülasyondur. Resmi puanınız farklı olabilir.</p>
+            </div>
+        </div>
+
+        <!-- Test Screen -->
+        <div id="test-screen" class="screen">
+            <header class="test-header">
+                <div class="header-left">
+                    <button id="exit-test" class="btn btn-ghost btn-sm" title="Testten Çık">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 6L6 18M6 6l12 12"/>
+                        </svg>
+                        <span>Çıkış</span>
+                    </button>
+                </div>
+                <div class="header-center">
+                    <div id="module-indicator" class="module-badge">R&W Modül 1</div>
+                    <h2 id="question-counter">Soru 1 / 98</h2>
+                </div>
+                <div class="header-right">
+                    <div id="timer" class="timer">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                        <span id="timer-display">64:00</span>
+                    </div>
+                </div>
+            </header>
+
+            <main class="test-main">
+                <div class="question-nav" id="question-nav">
+                    <!-- Question numbers will be inserted here -->
+                </div>
+
+                <div id="question-container" class="question-container">
+                    <!-- Questions rendered here -->
+                </div>
+
+                <div class="test-footer">
+                    <div class="footer-left">
+                        <button id="mark-review" class="btn btn-outline" title="Gözden Geçirme için İşaretle">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                            </svg>
+                            <span>İşaretle</span>
+                        </button>
+                        <button id="clear-answer" class="btn btn-outline" title="Cevabı Temizle">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                            </svg>
+                            <span>Temizle</span>
+                        </button>
+                    </div>
+                    <div class="footer-center">
+                        <div id="progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                            <div id="progress-fill" class="progress-fill"></div>
+                        </div>
+                        <span id="progress-text">0% tamamlandı</span>
+                    </div>
+                    <div class="footer-right">
+                        <button id="prev-btn" class="btn btn-secondary" disabled>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 18l-6-6 6-6"/>
+                            </svg>
+                            <span>Geri</span>
+                        </button>
+                        <button id="next-btn" class="btn btn-primary">
+                            <span>İleri</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                        </button>
+                        <button id="finish-btn" class="btn btn-danger" style="display: none;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <path d="M22 4L12 14.01l-3-3"/>
+                            </svg>
+                            <span>Sınavı Bitir</span>
+                        </button>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <header class="results-header">
+                <div class="logo">
+                    <svg width="48" height="48" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="64" height="64" rx="12" fill="#0066CC"/>
+                        <text x="32" y="42" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="700" fill="white">SAT</text>
+                    </svg>
+                </div>
+                <h1>Test Sonuçları</h1>
+                <p id="test-date" class="test-date"></p>
+            </header>
+
+            <div class="results-summary">
+                <div class="score-card total">
+                    <div class="score-label">Toplam Puan</div>
+                    <div class="score-value" id="total-score">—</div>
+                    <div class="score-range" id="total-range">400 - 1600</div>
+                </div>
+                <div class="score-card rw">
+                    <div class="score-label">Reading & Writing</div>
+                    <div class="score-value" id="rw-score">—</div>
+                    <div class="score-range" id="rw-range">200 - 800</div>
+                </div>
+                <div class="score-card math">
+                    <div class="score-label">Math</div>
+                    <div class="score-value" id="math-score">—</div>
+                    <div class="score-range" id="math-range">200 - 800</div>
+                </div>
+            </div>
+
+            <div class="results-stats">
+                <div class="stat">
+                    <span class="stat-value" id="correct-count">0</span>
+                    <span class="stat-label">Doğru</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="wrong-count">0</span>
+                    <span class="stat-label">Yanlış</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="blank-count">0</span>
+                    <span class="stat-label">Boş</span>
+                </div>                <div class="stat">
+                    <span class="stat-value" id="accuracy-rate">%0</span>
+                    <span class="stat-label">Doğruluk</span>
+                </div>
+            </div>
+
+            <div class="results-tabs">
+                <button class="tab-btn active" data-tab="review">Tüm Soruları Gözden Geçir</button>
+                <button class="tab-btn" data-tab="wrong">Sadece Yanlışlar</button>
+                <button class="tab-btn" data-tab="flagged">İşaretlenmişler</button>
+                <button class="tab-btn" data-tab="summary">Bölüm Özeti</button>
+            </div>
+
+            <div class="tab-content">                <div id="tab-review" class="tab-panel active">                    <div id="questions-review" class="questions-review"></div>                </div>                <div id="tab-wrong" class="tab-panel">                    <div id="questions-wrong" class="questions-review"></div>                </div>                <div id="tab-flagged" class="tab-panel">                    <div id="questions-flagged" class="questions-review"></div>                </div>                <div id="tab-summary" class="tab-panel">                    <div id="summary-content"></div>                </div>            </div>
+
+            <div class="results-actions">                <button id="retake-test" class="btn btn-secondary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                        <path d="M3 3v5h5"/>
+                    </svg>
+                    <span>Testi Tekrar Çöz</span>
+                </button>                <button id="download-report" class="btn btn-primary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    <span>Rapor İndir (JSON)</span>
+                </button>            </div>
+        </div>
+
+        <!-- Confirmation Modals -->
+        <div id="modal-overlay" class="modal-overlay"></div>
+        <div id="exit-modal" class="modal">            <div class="modal-content">                <h3>Testten Çıkılsın mı?</h3>                <p>İlerleme kaydedilmeyecektir. Emin misiniz?</p>                <div class="modal-actions">                    <button id="exit-cancel" class="btn btn-secondary">İptal</button>                    <button id="exit-confirm" class="btn btn-danger">Evet, Çık</button>                </div>            </div>        </div>
+        <div id="finish-modal" class="modal">            <div class="modal-content">                <h3>Sınavı Bitirmek İstiyor musunuz?</h3>                <p>Bu işlem geri alınamaz. Tüm cevaplarınız kaydedilecek ve puanınız hesaplanacaktır.</p>                <div id="unanswered-warning" class="warning"></div>                <div class="modal-actions">                    <button id="finish-cancel" class="btn btn-secondary">Hayır, Devam Et</button>                    <button id="finish-confirm" class="btn btn-danger">Evet, Bitir</button>                </div>            </div>        </div>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
